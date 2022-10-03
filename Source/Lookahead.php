@@ -38,6 +38,8 @@ declare(strict_types=1);
 
 namespace Hoa\Iterator;
 
+use Mapado\TicketingBundle\Exception\Subscription\SubscriptionForbiddenMixedItemsException;
+
 /**
  * Class \Hoa\Iterator\Lookahead.
  *
@@ -70,7 +72,7 @@ class Lookahead extends IteratorIterator implements Outer
     /**
      * Construct.
      */
-    public function __construct(iterable $iterator)
+    public function __construct(\Iterator $iterator)
     {
         $this->_iterator = $iterator;
 
@@ -80,7 +82,7 @@ class Lookahead extends IteratorIterator implements Outer
     /**
      * Get inner iterator.
      */
-    public function getInnerIterator(): iterable
+    public function getInnerIterator(): ?\Iterator
     {
         return $this->_iterator;
     }
@@ -88,7 +90,7 @@ class Lookahead extends IteratorIterator implements Outer
     /**
      * Return the current element.
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->_current;
     }
@@ -96,7 +98,7 @@ class Lookahead extends IteratorIterator implements Outer
     /**
      * Return the key of the current element.
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->_key;
     }
